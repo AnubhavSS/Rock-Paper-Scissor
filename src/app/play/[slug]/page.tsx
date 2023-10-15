@@ -14,7 +14,7 @@ const Play = ({ params }: { params: { slug: string } }) => {
   const [timer, settimer] = useState<number>(3);
   const [score, setscore] = useState<number>(0);
   const [winner, setwinner] = useState<null | number>(null);
-  const [pc, setpc] = useState<null | number>(null);
+  const [pc, setpc] = useState< number>(-1);
   const router = useRouter();
 
   const calculateAnswer = (ans: number) => {
