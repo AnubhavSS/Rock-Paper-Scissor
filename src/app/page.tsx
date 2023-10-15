@@ -1,95 +1,129 @@
-import Image from 'next/image'
-import styles from './page.module.css'
+"use client";
+
+import Image from "next/image";
+import React, { useState } from "react";
+import styles from "./page.module.css";
+import {
+  Box,
+  Typography,
+  Button,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+ Stack,
+  Slide,
+
+} from "@mui/material";
+import Hero from "@/components/Hero";
+import { TransitionProps } from "@mui/material/transitions";
+
+const Transition = React.forwardRef(function Transition(
+  props: TransitionProps & {
+    children: React.ReactElement<any, any>;
+  },
+  ref: React.Ref<unknown>
+) {
+  return <Slide direction="up" ref={ref} {...props} />;
+});
 
 export default function Home() {
+  const [open, setOpen] = useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>src/app/page.tsx</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
-      </div>
-
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
+    <Box>
+      <Box
+        justifyContent={"space-evenly"}
+        alignItems={"center"}
+        sx={{
+          border: "2px solid white",
+          width: "50vw",
+          height: "15vh",
+          p: 2,
+          marginX: "auto",
+          marginTop: 4,
+          borderRadius: 10,
+          display: "flex",
+          flexDirection: { xs: "column", md: "row" }, // Switch to column on small screens
+        }}
+      >
+        <Typography
+          sx={{
+            fontWeight: 500,
+            color: "#FFF",
+            fontSize: { md: "40px", xs: "20px" },
+          }}
         >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
+          Rock
+        </Typography>
+        <Typography
+          sx={{
+            fontWeight: 500,
+            color: "#FFF",
+            fontSize: { md: "40px", xs: "20px" },
+          }}
         >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
+          Paper
+        </Typography>
+        <Typography
+          sx={{
+            fontWeight: 500,
+            color: "#FFF",
+            fontSize: { md: "40px", xs: "20px" },
+          }}
         >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore the Next.js 13 playground.</p>
-        </a>
+          Scissors
+        </Typography>
+      </Box>
+      <Hero />
+      <Button
+        sx={{
+          position: "fixed",
+          bottom: "20px", // Adjust as needed to control the distance from the bottom
+          right: "20px", // Adjust as needed to control the distance from the right
+        }}
+        variant="outlined"
+        color="error"
+        onClick={handleClickOpen}
+      >
+        Rules
+      </Button>
+      <Dialog
+        open={open}
+        TransitionComponent={Transition}
+        keepMounted
+        onClose={handleClose}
+        aria-describedby="alert-dialog-slide-description"
+      >
+        <DialogTitle textAlign={'center'}>{"Rules"}</DialogTitle>
+        <DialogContent >
+          <Stack direction={'row'} justifyContent={'space-evenly'}>
+        <Image src={'/assets/paper.png'} alt="paper" width={50} height={50}/>
+        <Typography mx={2}>Beats <Typography sx={{fontSize:'20px'}}>&rarr; &rarr;</Typography></Typography>
+        <Image src={'/assets/fist.png'} alt="fist" width={50} height={50}/>
+        </Stack>
 
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
-  )
+        <Stack direction={'row'} justifyContent={'space-evenly'}>
+        <Image src={'/assets/scissor.png'} alt="paper" width={50} height={50}/>
+        <Typography mx={2}>Beats <Typography sx={{fontSize:'20px'}}>&rarr; &rarr;</Typography></Typography>
+        <Image src={'/assets/paper.png'} alt="fist" width={50} height={50}/>
+        </Stack>
+
+        <Stack direction={'row'} justifyContent={'space-evenly'}>
+        <Image src={'/assets/fist.png'} alt="paper" width={50} height={50}/>
+        <Typography mx={2}>Beats <Typography sx={{fontSize:'20px'}}>&rarr; &rarr;</Typography></Typography>
+        <Image src={'/assets/scissor.png'} alt="fist" width={50} height={50}/>
+        </Stack>
+
+        </DialogContent>
+      </Dialog>
+    </Box>
+  );
 }
